@@ -3,4 +3,4 @@ defmodule Gdable do
   def gcd(x, y), do: gcd(y, rem(x, y))
 end
 
-Gdable.gcd(10, 15) |> IO.inspect()
+Gdable.gcd(10, 15) # |> IO.inspect()

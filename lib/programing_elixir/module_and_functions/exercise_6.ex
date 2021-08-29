@@ -2,12 +2,12 @@ defmodule Chop do
   def guess(purpose, s..e) do
     list = Enum.to_list(s..e)
     currentValue = Enum.at(list, div(Enum.count(list) - 1, 2))
-    IO.inspect("Is it #{currentValue}")
+    # IO.inspect("Is it #{currentValue}")
     _guess(purpose, s..e, currentValue)
   end
 
   defp _guess(purpose, _, currentValue) when currentValue == purpose do
-    IO.inspect(currentValue)
+    # IO.inspect(currentValue)
   end
 
   defp _guess(purpose, _..e, currentValue) when currentValue < purpose do

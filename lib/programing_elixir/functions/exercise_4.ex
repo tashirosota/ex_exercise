@@ -5,5 +5,5 @@ prefix = fn first_str ->
 end
 
 mrs = prefix.("Mrs")
-mrs.("Smith") |> IO.inspect()
-prefix.("Elixir").("Rocks") |> IO.inspect()
+mrs.("Smith") # |> IO.inspect()
+prefix.("Elixir").("Rocks") # |> IO.inspect()

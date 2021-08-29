@@ -3,4 +3,4 @@ defmodule Sumable do
   def sum(i), do: i + sum(i - 1)
 end
 
-Sumable.sum(10) |> IO.inspect()
+Sumable.sum(10) # |> IO.inspect()
