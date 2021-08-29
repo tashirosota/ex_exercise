@@ -2,8 +2,9 @@ defmodule MylistTest do
   use ExUnit.Case
   doctest Mylist
 
-  test "call to function for each element and reduce to 0" do
-    # Mylist.map_sum([1, 2, 3], &(&1 * &1)) |> IO.inspect()
-    assert Mylist.map_sum([1, 2, 3], &(&1 * &1)) == 14
-  end
+  test ".map_sum", do: assert(Mylist.map_sum([1, 2, 3], &(&1 * &1)) == 14)
+
+  test ".max", do: assert(Mylist.max([1, 4, 3, 2]) == 4)
+
+  test ".caesar", do: assert(Mylist.caesar('ryvkve', 13) == 'elixir')
 end
