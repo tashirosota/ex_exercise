@@ -13,4 +13,8 @@ defmodule Mylist do
   def caesar(list, num), do: Enum.map(list, &_caesar(&1, num))
   defp _caesar(char, num) when char + num > 122, do: char + num - 26
   defp _caesar(char, num) when char + num < 122, do: char + num
+
+  def span(from, to) do
+    Enum.to_list(from..to)
+  end
 end
