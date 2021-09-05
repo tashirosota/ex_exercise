@@ -22,4 +22,8 @@ defmodule MyStringTest do
     assert(MyString.calculate('3 / 2') == 1.5)
     assert(MyString.calculate('3 * 2') == 6)
   end
+
+  test "center/1" do
+    assert(MyString.center(["cat", "zebra", "elephant"]) == "  cat\n zebra\nelephant\n")
+  end
 end

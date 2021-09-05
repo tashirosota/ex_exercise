@@ -22,14 +22,32 @@ defmodule MyString do
       else: false
   end
 
-  @spec calculate(any) :: number
   def calculate(str_func) do
-    [first, second, last] = str_func |> to_string() |> String.split
+    [first, second, last] = str_func |> to_string() |> String.split()
+
     case second do
-     "*" -> String.to_integer(first) * String.to_integer(last)
-     "/" -> String.to_integer(first) / String.to_integer(last)
-     "-" -> String.to_integer(first) - String.to_integer(last)
-     "+" -> String.to_integer(first) + String.to_integer(last)
+      "*" -> String.to_integer(first) * String.to_integer(last)
+      "/" -> String.to_integer(first) / String.to_integer(last)
+      "-" -> String.to_integer(first) - String.to_integer(last)
+      "+" -> String.to_integer(first) + String.to_integer(last)
     end
+  end
+
+  def center(strings) do
+    max_length =
+      strings
+      |> Enum.sort(&(String.length(&1) <= String.length(&2)))
+      |> List.last()
+      |> String.length()
+
+    inspact_func = fn str ->
+      curent_length = str |> String.length()
+      num_blank_word = (max_length - curent_length) |> div(2)
+      blank_words = List.duplicate(" ", num_blank_word)
+      (blank_words ++ [str, "\n"]) |> Enum.join()
+    end
+
+    Enum.map(strings, inspact_func)
+    |> Enum.join()
   end
 end
