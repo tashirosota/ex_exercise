@@ -26,4 +26,8 @@ defmodule MyStringTest do
   test "center/1" do
     assert(MyString.center(["cat", "zebra", "elephant"]) == "  cat\n zebra\nelephant\n")
   end
+
+  test "capitalize_sentence/1" do
+    assert(MyString.capitalize_sentence("oh. a Dog. woof. ") == "Oh. A dog. Woof. ")
+  end
 end

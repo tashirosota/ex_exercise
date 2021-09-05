@@ -50,4 +50,12 @@ defmodule MyString do
     Enum.map(strings, inspact_func)
     |> Enum.join()
   end
+
+  def capitalize_sentence(sentence) do
+    sentence
+    |> String.split(". ")
+    |> Enum.map(&String.downcase(&1))
+    |> Enum.map(&String.capitalize(&1))
+    |> Enum.join(". ")
+  end
 end
