@@ -58,4 +58,17 @@ defmodule MyString do
     |> Enum.map(&String.capitalize(&1))
     |> Enum.join(". ")
   end
+
+  def sales_tax(tax_rates, orders) do
+    for order <- orders do
+      tax_key = Keyword.get(order, :ship_to)
+
+      if rate = Keyword.get(tax_rates, tax_key) do
+        net_amount = Keyword.get(order, :net_amount)
+        order ++ [total_amount: net_amount + net_amount * rate]
+      else
+        order
+      end
+    end
+  end
 end
