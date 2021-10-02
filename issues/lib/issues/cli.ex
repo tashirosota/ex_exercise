@@ -37,7 +37,29 @@ defmodule Issues.CLI do
     System.halt(0)
   end
 
-  def process({user, project, _count}) do
-    Issues.Githubissues.fetch(user, project)
+  def process({user, project, count}) do
+    Issues.GithubIssues.fetch(user, project)
+    |> decode_response
+    |> convert_to_list_of_maps
+    |> Enum.take(count)
+  end
+
+  def decode_response({:ok, body}), do: body
+
+  def decode_response({:error, error}) do
+    # poisonの仕様が変わったので
+    # {_, message} = List.keyfind(error, "message", 0)
+    IO.puts("Error fetching from Github: #{error}")
+    System.halt(2)
+  end
+
+  def convert_to_list_of_maps(list) do
+    list
+    |> Enum.map(&Enum.into(&1, Map.new()))
+  end
+
+  def sort_into_ascending_order(list_of_issues) do
+    func = &(&1["created_at"] <= &2["created_at"])
+    Enum.sort(list_of_issues, func)
   end
 end
