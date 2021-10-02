@@ -6,7 +6,9 @@ defmodule Issues.CLI do
   taple of the last _n_ issues in a github project
   """
   def run(argv) do
-    parse_args(argv)
+    argv
+    |> parse_args
+    |> process
   end
 
   @doc """
@@ -17,12 +19,25 @@ defmodule Issues.CLI do
   Return a tuple of `{ user, project, count }`, or `:help` if help was given.
   """
   def parse_args(argv) do
-    parse = OptionParser.parse(argv, switches: [ help: :boolean], aliases: [ h: :help])
+    parse = OptionParser.parse(argv, switches: [help: :boolean], aliases: [h: :help])
+
     case parse do
       {[help: true], _, _} -> :help
-      {_, [user, project, count],_} -> { user, project, count |> String.to_integer }
-      {_, [user, project],_} -> { user, project, @default_count }
+      {_, [user, project, count], _} -> {user, project, count |> String.to_integer()}
+      {_, [user, project], _} -> {user, project, @default_count}
       _ -> :help
     end
+  end
+
+  def process(:help) do
+    IO.puts("""
+    using: issues <user> <project> [ count | #{@default_count} ]
+    """)
+
+    System.halt(0)
+  end
+
+  def process({user, project, _count}) do
+    Issues.Githubissues.fetch(user, project)
   end
 end
